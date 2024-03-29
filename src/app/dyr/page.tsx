@@ -2,13 +2,10 @@ import { Animal } from "@/app/types";
 import Link from "next/link";
 
 async function getDyr() {
-  const params = {
+  const res = await fetch("https://vef2-einstaklings.vercel.app/api/pets", {
+    cache: "no-store",
     method: "GET",
-  };
-  const res = await fetch(
-    "https://vef2-einstaklings.vercel.app/api/pets",
-    params
-  );
+  });
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -31,13 +28,13 @@ export default async function Dyr() {
       <div>
         <ul>
           <li>
-            <Link href="/dyr/fish">Sjávardýr</Link>
+            <Link href="/dyr/Fish">Sjávardýr</Link>
           </li>
           <li>
-            <Link href="/dyr/bug">Pöddur</Link>
+            <Link href="/dyr/Bug">Pöddur</Link>
           </li>
           <li>
-            <Link href="/dyr/farm-animal">Sveita dýr</Link>
+            <Link href="/dyr/Farm">Sveita dýr</Link>
           </li>
         </ul>
       </div>
