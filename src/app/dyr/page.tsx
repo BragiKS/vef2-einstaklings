@@ -1,29 +1,46 @@
 import { Animal } from "@/app/types";
+import Link from "next/link";
 
 async function getDyr() {
+  const params = {
+    method: "GET",
+  };
   const res = await fetch(
-    "https://vef2-einstaklings.vercel.app/api/fetch-pets"
+    "https://vef2-einstaklings.vercel.app/api/fetch-pets",
+    params
   );
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
 
-  return res.json();
+  const result = await res.json();
+
+  return result;
 }
 
 interface DyrPackage {
-  result: Animal[];
+  rows: Animal[];
 }
 
 // Your page component
 export default async function Dyr() {
   const dataPack: DyrPackage = await getDyr();
-  const data = dataPack.result;
+  const data = dataPack.rows;
 
   return (
     <div>
       <h1>Halló dýr</h1>
+      <div>
+        <ul>
+          <li>
+            <Link href="/dyr/fish">Sjávardýr</Link>
+          </li>
+          <li>
+            <Link href="/dyr/bug">Pöddur</Link>
+          </li>
+        </ul>
+      </div>
       <div className="cards">
         {data.map((animal) => (
           <div key={animal.species}>
@@ -33,7 +50,7 @@ export default async function Dyr() {
               Stærð:{" "}
               {animal.size_hi === animal.size_lo
                 ? animal.size_hi
-                : `${animal.size_lo}-${animal.size_hi}`}
+                : `${animal.size_lo}-${animal.size_hi}cm`}
             </p>
           </div>
         ))}
