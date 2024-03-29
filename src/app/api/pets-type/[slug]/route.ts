@@ -14,7 +14,9 @@ export async function GET(request: Request, { params }: { params: Params }) {
       return NextResponse.json({ message: "Pets not found" }, { status: 404 });
     }
 
-    return NextResponse.json(result.rows, { status: 200 });
+    const response = NextResponse.json(result.rows, { status: 200 });
+    response.headers.set("Cache-Control", "no-store, max-age=0");
+    return response;
   } catch (error) {
     let message;
     if (error instanceof Error) message = error.message;
