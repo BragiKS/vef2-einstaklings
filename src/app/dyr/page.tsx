@@ -6,7 +6,7 @@ async function getDyr() {
     method: "GET",
   };
   const res = await fetch(
-    "https://vef2-einstaklings.vercel.app/api/pets",
+    "https://vef2-einstaklings-git-main-bragi-projects.vercel.app/api/pets",
     params
   );
 
