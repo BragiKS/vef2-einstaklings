@@ -1,5 +1,4 @@
 import { sql } from "@vercel/postgres";
-import { stat } from "fs";
 import { NextResponse } from "next/server";
 
 type Params = {
@@ -9,10 +8,10 @@ type Params = {
 export async function GET(request: Request, { params }: { params: Params }) {
   try {
     const result =
-      await sql`SELECT name, username, password, admin FROM users WHERE username=${params.slug}`;
+      await sql`SELECT species, type, price, size_hi, size_lo FROM pets WHERE type=${params.slug}`;
 
     if (result.rowCount === 0) {
-      return NextResponse.json({ message: "User not found" }, { status: 404 });
+      return NextResponse.json({ message: "Pets not found" }, { status: 404 });
     }
 
     return NextResponse.json(result.rows, { status: 200 });

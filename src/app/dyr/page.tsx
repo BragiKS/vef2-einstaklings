@@ -6,7 +6,7 @@ async function getDyr() {
     method: "GET",
   };
   const res = await fetch(
-    "https://vef2-einstaklings.vercel.app/api/fetch-pets",
+    "https://vef2-einstaklings.vercel.app/api/pets",
     params
   );
 
@@ -15,7 +15,6 @@ async function getDyr() {
   }
 
   const result = await res.json();
-
   return result;
 }
 
@@ -23,11 +22,9 @@ interface DyrPackage {
   rows: Animal[];
 }
 
-// Your page component
 export default async function Dyr() {
-  const dataPack: DyrPackage = await getDyr();
-  const data = dataPack.rows;
-
+  const data: Animal[] = await getDyr();
+  console.log(data);
   return (
     <div>
       <h1>Halló dýr</h1>
@@ -38,6 +35,9 @@ export default async function Dyr() {
           </li>
           <li>
             <Link href="/dyr/bug">Pöddur</Link>
+          </li>
+          <li>
+            <Link href="/dyr/farm-animal">Sveita dýr</Link>
           </li>
         </ul>
       </div>
