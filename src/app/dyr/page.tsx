@@ -23,7 +23,8 @@ interface DyrPackage {
 }
 
 export default async function Dyr() {
-  const data: Animal[] = await getDyr();
+  const dataPack: DyrPackage = await getDyr();
+  const data = dataPack.rows;
   console.log(data);
   return (
     <div>
