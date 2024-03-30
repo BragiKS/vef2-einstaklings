@@ -49,6 +49,7 @@ export default async function Dyr() {
                 ? animal.size_hi
                 : `${animal.size_lo}-${animal.size_hi}cm`}
             </p>
+            <p>Verð: {animal.price}kr</p>
           </div>
         ))}
       </div>
